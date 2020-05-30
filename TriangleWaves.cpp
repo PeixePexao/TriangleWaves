@@ -24,6 +24,7 @@ void Generator() {
     contador = 4;
     double somas[vezes];
     double quadrados[vezes * 2];
+    int diario[vezes];
     if (cin.fail()) { //Testa para input inválido
         cout << "Invalid input" << endl;
         desastre = true; //Liga o failsafe
@@ -32,7 +33,9 @@ void Generator() {
 
     for (int i = 0; i < vezes; i++) {
         somas[i] = pow(contador, 2) + pow(contador - 1, 2); //Gera o conjunto X² + (x-1)²
+        diario[i] = contador;
         contador++;
+        
     }
     for (int i = 0; i < (vezes * 2); i++) {
         quadrados[i] = pow(i, 2); //Gera os quadrados
@@ -41,7 +44,7 @@ void Generator() {
     for (int i = 0; i < vezes; i++) {
         for (int z = 0; z < vezes * 2; z++) {
             if (somas[i] == quadrados[z]) {
-                cout << "Match: " << somas[i] << " é igual a " << quadrados[z] << endl;
+                cout << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] + 1 << "²" << endl;
             }
         }
         
