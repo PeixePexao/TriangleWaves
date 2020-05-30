@@ -18,7 +18,7 @@ int main() {
 }
 
 void Generator() {
-    cout << "Digite o nome do arquivo no qual os resultados serão escritos";
+    cout << "Digite o nome do arquivo no qual os resultados serão escritos: ";
     string nome;
     cin >> nome;
     if (cin.fail()) {
@@ -57,8 +57,8 @@ void Generator() {
     for (int i = 0; i < vezes; i++) {
         for (int z = 0; z < vezes * 2; z++) {
             if (somas[i] == quadrados[z]) {
-                cout << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] + 1 << "²" << endl;
-                arquivo << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] + 1 << "²" << endl;
+                cout << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] - 1 << "²" << endl;
+                arquivo << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] - 1 << "²" << endl;
             }
         }
         
