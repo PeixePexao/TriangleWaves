@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <cmath>
-using namespace std;
+using namespace std; //TESTE
 void Generator();
 bool desastre = false;
 int main() {
