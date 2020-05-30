@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <cmath>
+#include <fstream>
 using namespace std; //TESTE
 void Generator();
 bool desastre = false;
@@ -17,6 +18,18 @@ int main() {
 }
 
 void Generator() {
+    cout << "Digite o nome do arquivo no qual os resultados serão escritos";
+    string nome;
+    cin >> nome;
+    if (cin.fail()) {
+        desastre = true;
+        main();
+    }
+    ofstream arquivo (nome);
+    if (!arquivo.is_open()) {
+        desastre = true;
+        main();
+    }
 
     cout << "Quantas vezes devemos aumentar o x em x² + (x-1)²? Lembrando que x começará como 4: "; //IGNORE
     int vezes, contador;
@@ -45,9 +58,11 @@ void Generator() {
         for (int z = 0; z < vezes * 2; z++) {
             if (somas[i] == quadrados[z]) {
                 cout << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] + 1 << "²" << endl;
+                arquivo << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] + 1 << "²" << endl;
             }
         }
         
     }
+    arquivo.close();
 
 }
