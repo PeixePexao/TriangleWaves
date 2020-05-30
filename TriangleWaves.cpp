@@ -3,10 +3,17 @@
 #include <cmath>
 using namespace std;
 void Generator();
+bool desastre = false;
 int main() {
-    cout << "Bem vindo ao TriangleWaves" << endl;
+    if (desastre == false) { //Testa se o failsafe foi ativado
+        cout << "Bem vindo ao TriangleWaves" << endl;
 
-    Generator();
+        Generator();
+    }
+    else { //Se for desligue o programa
+        return 0;
+    }
+    
 }
 
 void Generator() {
@@ -17,23 +24,24 @@ void Generator() {
     contador = 4;
     double somas[vezes];
     double quadrados[vezes * 2];
-    if (cin.fail()) {
+    if (cin.fail()) { //Testa para input inválido
         cout << "Invalid input" << endl;
-        Generator();
+        desastre = true; //Liga o failsafe
+        main();
     }
 
     for (int i = 0; i < vezes; i++) {
-        somas[i] = pow(contador, 2) + pow(contador - 1, 2);
+        somas[i] = pow(contador, 2) + pow(contador - 1, 2); //Gera o conjunto X² + (x-1)²
         contador++;
     }
     for (int i = 0; i < (vezes * 2); i++) {
-        quadrados[i] = pow(i, 2);
+        quadrados[i] = pow(i, 2); //Gera os quadrados
     }
-    cout << "Initiating checks..." << endl; 
+    
     for (int i = 0; i < vezes; i++) {
         for (int z = 0; z < vezes * 2; z++) {
             if (somas[i] == quadrados[z]) {
-                cout << "Match: " << somas[i] << " é igual a " << quadrados[z];
+                cout << "Match: " << somas[i] << " é igual a " << quadrados[z] << endl;
             }
         }
         
