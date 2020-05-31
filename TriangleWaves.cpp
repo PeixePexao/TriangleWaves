@@ -33,8 +33,9 @@ void Generator() {
     
 
     cout << "Quantas vezes devemos aumentar o x em x² + (x-1)²? Lembrando que x começará como 4: "; //IGNORE
-    int vezes, contador;
+    long unsigned int vezes, contador;
     cin >> vezes;
+    
     contador = 4;
     double somas[vezes];
     double quadrados[vezes * 2];
