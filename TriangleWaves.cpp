@@ -2,7 +2,8 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
-using namespace std; //TESTE
+using namespace std; 
+
 void Generator();
 bool desastre = false;
 int main() {
@@ -21,8 +22,8 @@ void Generator() {
     cout << "Digite o nome do arquivo no qual os resultados serão escritos: ";
     string nome;
     cin >> nome;
-    if (cin.fail()) {
-        desastre = true;
+    if (cin.fail()) { //Testa se o nome é inválido
+        desastre = true; //Se sim, ativa o failsafe e volta para main
         main();
     }
     ofstream arquivo (nome);
@@ -59,10 +60,17 @@ void Generator() {
             if (somas[i] == quadrados[z]) {
                 cout << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] - 1 << "²" << endl;
                 arquivo << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] - 1 << "²" << endl;
+            
             }
         }
-        
     }
     arquivo.close();
 
 }
+
+/*A idéia básica desse projeto é testar quando a hipotenusa de um
+triângulo com catetos x e x -1 vai ser um numero natural.
+
+Esse código faz isso, primeiramente gerando uma array que contém todos os quadrados perfeitos até um certo
+#include <stdio.h>
+limite imposto pelo usuário, depois gerando uma array com os valores que a hipotenusa pode ser(x² + (x-1)²) e comparando as duas   */ 
