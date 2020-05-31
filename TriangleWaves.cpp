@@ -2,10 +2,13 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
+#include <string>
+#include <algorithm>
 using namespace std; 
 
 void Generator();
 bool desastre = false;
+string tempo(int codigo);
 int main() {
     if (desastre == false) { //Testa se o failsafe foi ativado
         cout << "Bem vindo ao TriangleWaves" << endl;
@@ -26,11 +29,7 @@ void Generator() {
         desastre = true; //Se sim, ativa o failsafe e volta para main
         main();
     }
-    ofstream arquivo (nome);
-    if (!arquivo.is_open()) {
-        desastre = true;
-        main();
-    }
+    
 
     cout << "Quantas vezes devemos aumentar o x em x² + (x-1)²? Lembrando que x começará como 4: "; //IGNORE
     int vezes, contador;
@@ -44,7 +43,14 @@ void Generator() {
         desastre = true; //Liga o failsafe
         main();
     }
-
+    ofstream arquivo (nome, ios::out);
+    if (!arquivo.is_open()) {
+        desastre = true;
+        main();
+    }
+    string horario = tempo(1);
+    
+    arquivo << tempo(2) << endl << "COMEÇO DE ESCRITA " << horario << tempo(2) << endl;
     for (int i = 0; i < vezes; i++) {
         somas[i] = pow(contador, 2) + pow(contador - 1, 2); //Gera o conjunto X² + (x-1)²
         diario[i] = contador;
@@ -67,7 +73,21 @@ void Generator() {
     arquivo.close();
 
 }
+string tempo( int codigo) {
+    if (codigo == 1) {
+        time_t agora = time(0);
 
+        tm* tempolocal = localtime(&agora);
+        string resultado = asctime(tempolocal);
+        return resultado;
+    }
+    else {
+        return "/////////////////////////////////////////////";
+    }
+
+
+
+}
 /*A idéia básica desse projeto é testar quando a hipotenusa de um
 triângulo com catetos x e x -1 vai ser um numero natural.
 
