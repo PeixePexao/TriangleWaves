@@ -8,7 +8,7 @@ using namespace std;
 
 void Generator();
 bool desastre = false;
-string tempo(int codigo);
+
 int main() {
     if (desastre == false) { //Testa se o failsafe foi ativado
         cout << "Bem vindo ao TriangleWaves" << endl;
@@ -22,7 +22,7 @@ int main() {
 }
 
 void Generator() {
-    cout << "Digite o nome do arquivo no qual os resultados serão escritos: ";
+    cout << "Digite o nome do arquivo no qual os resultados serão escritos (.csv será adicionado automaticamente): ";
     string nome;
     cin >> nome;
     if (cin.fail()) { //Testa se o nome é inválido
@@ -43,14 +43,15 @@ void Generator() {
         desastre = true; //Liga o failsafe
         main();
     }
-    ofstream arquivo (nome, ios::out);
+    ofstream arquivo ((nome + ".csv"), ios::out);
     if (!arquivo.is_open()) {
         desastre = true;
         main();
     }
-    string horario = tempo(1);
+    arquivo << "x,x-1,c,c²\n";
     
-    arquivo << tempo(2) << endl << "COMEÇO DE ESCRITA " << horario << tempo(2) << endl;
+    
+    
     for (int i = 0; i < vezes; i++) {
         somas[i] = pow(contador, 2) + pow(contador - 1, 2); //Gera o conjunto X² + (x-1)²
         diario[i] = contador;
@@ -65,7 +66,7 @@ void Generator() {
         for (int z = 0; z < vezes * 2; z++) {
             if (somas[i] == quadrados[z]) {
                 cout << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] - 1 << "²" << endl;
-                arquivo << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] - 1 << "²" << endl;
+                arquivo << diario[i] << "," << diario[i] - 1 << "," << sqrt(somas[i]) << "," << somas[i] << "\n";
             
             }
         }
@@ -73,21 +74,7 @@ void Generator() {
     arquivo.close();
 
 }
-string tempo( int codigo) {
-    if (codigo == 1) {
-        time_t agora = time(0);
 
-        tm* tempolocal = localtime(&agora);
-        string resultado = asctime(tempolocal);
-        return resultado;
-    }
-    else {
-        return "/////////////////////////////////////////////";
-    }
-
-
-
-}
 /*A idéia básica desse projeto é testar quando a hipotenusa de um
 triângulo com catetos x e x -1 vai ser um numero natural.
 
