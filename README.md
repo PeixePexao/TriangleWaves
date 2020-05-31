@@ -1,8 +1,11 @@
 # TriangleWaves
 A repository to identify if a number K = sqrt(x² + (x-1)²) is natural 
 
-This is a project to analyze the common rectangular triangle construction of 3,4 & 5. It looks for other events of a 
-construction X² + (x-1)² being a natural number by comparing it to an array of squares.
+The idea for this project is testing when the hypotenuse of a triangle
+whose cathets are x and x - 1 will be a natural number.
+
+This code first generates an array that contains all the perfect squares up to a certain limit, which
+the user dictates, then it generates an array of possible hypotenuse values (x² + (x-1)²) and compares the two.
 
 [PT-BR]
 
