@@ -37,9 +37,9 @@ void Generator() {
     cin >> vezes;
     
     contador = 4;
-    double somas[vezes];
-    double quadrados[vezes * 2];
-    int diario[vezes];
+    double soma;
+    double quadrados;
+    int diario;
     if (cin.fail()) { //Testa para input inválido
         cout << "Invalid input" << endl;
         desastre = true; //Liga o failsafe
@@ -51,28 +51,21 @@ void Generator() {
         main();
     }
     arquivo << "x,x-1,c,c²\n";
-    
-    
-    
     for (int i = 0; i < vezes; i++) {
-        somas[i] = pow(contador, 2) + pow(contador - 1, 2); //Gera o conjunto X² + (x-1)²
-        diario[i] = contador;
-        contador++;
-        
-    }
-    for (int i = 0; i < (vezes * 2); i++) {
-        quadrados[i] = pow(i, 2); //Gera os quadrados
-    }
-    
-    for (int i = 0; i < vezes; i++) {
+        soma = (pow(contador, 2) + pow(contador - 1, 2));
         for (int z = 0; z < vezes * 2; z++) {
-            if (somas[i] == quadrados[z]) {
-                cout << "Match: " << somas[i] << "! Que é formado por " << diario[i] << "² + " << diario[i] - 1 << "²" << endl;
-                arquivo << diario[i] << "," << diario[i] - 1 << "," << sqrt(somas[i]) << "," << somas[i] << "\n"; //ESCREVE NO FORMATO CSV 
-            
+            quadrados = pow(z, 2);
+            if (quadrados == soma) {
+                cout << "Match\n";
+                arquivo << contador << "," << contador - 1 << "," << sqrt(soma) << "," << soma << endl;
             }
         }
+        contador++;
+
     }
+    
+    
+   
     arquivo.close();
 }
 /*A idéia básica desse projeto é testar quando a hipotenusa de um
